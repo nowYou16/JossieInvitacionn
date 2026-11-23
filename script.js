@@ -8,7 +8,7 @@ for (let h = 12; h <= 21; h++) hours.push(`${h === 12 ? 12 : h - 12}:00 p. m.`);
 const steps = [
 { k: 'fecha', l: 'Fecha', t: 'Día disponible', o: ['Lunes 30 de noviembre de 2026'], nota: 'Te iba a dar más opciones, pero no puedo otros días. Jeje, perdóname. 🥺' },
 { k: 'hora', l: 'Hora', t: '¿A qué hora nos vemos?', o: hours, cls: 'hours' },
-{ k: 'encuentro', l: 'Encuentro', t: '¿Cómo nos encontramos?', o: ['Nos encontramos en un punto medio', 'Recógeme cerca de mi casa (aunque no tengo movilidad xd)'], notas: { 'Nos encontramos en un punto medio': 'Parque, mall, etc.', 'Recógeme cerca de mi casa (aunque no tengo movilidad xd)': 'Esta opción nos queda cerca del lugar al que íbamos a comer.' } },
+{ k: 'encuentro', l: 'Encuentro', t: '¿Cómo nos encontramos?', o: ['Nos encontramos en un punto medio', 'Recógeme cerca de mi casa (aunque no tengo movilidad xd)'], notas: { 'Nos encontramos en un punto medio': 'Parque, mall, etc.', 'Recógeme cerca de mi casa (aunque no tengo movilidad xd)': 'Esta opción nos queda cerca del lugar al que iremos a comer.' } },
 { k: 'vestimenta', l: 'Vestimenta', t: '¿Qué vestimenta prefieres?', o: ['Casual', 'Semiformal', 'Formal'] },
 { k: 'pelicula', l: 'Película', t: '¿Qué tipo de película vemos?', o: ['Terror', 'Comedia', 'Acción', 'Romance', 'Suspenso', 'Animación'] },
 { k: 'cierre', l: 'Despedida', t: 'Para despedirnos al final de la invitación...', o: ['Un choque de puños, muy profesional 👊', 'Un simple "nos vemos", sin rodeos', 'Besito en el cachete'], notas: { 'Un choque de puños, muy profesional 👊': 'Excelente elección. Puñito reservado 👊', 'Un simple "nos vemos", sin rodeos': 'Perfecto, sin rodeos. Todo en orden.', 'Besito en el cachete': 'Al final tú decides, pero mi cachete ya estará listo. Jeje.' } }
