@@ -8,7 +8,7 @@ for (let h = 12; h <= 21; h++) hours.push(`${h === 12 ? 12 : h - 12}:00 p. m.`);
 const steps = [
   { k: 'fecha', l: 'Fecha', t: 'Día disponible', o: ['Lunes 30 de noviembre de 2026'], nota: 'Te iba a dar más opciones, pero no puedo otros días. Jeje, perdóname. 🥺' },
   { k: 'hora', l: 'Hora', t: '¿A qué hora nos vemos?', o: hours, cls: 'hours' },
-  { k: 'encuentro', l: 'Encuentro', t: '¿Cómo nos encontramos?', o: ['Nos encontramos en un punto medio', 'Recógeme cerca de mi casa (aunque no tengo movilidad xd)'], notas: { 'Nos encontramos en un punto medio': 'Parque, mall, etc.', 'Recógeme cerca de mi casa (aunque no tengo movilidad xd)': 'Esta opción nos queda cerca del lugar al que vamos a comer.' } },
+  { k: 'encuentro', l: 'Encuentro', t: '¿Cómo nos encontramos?', o: ['Nos encontramos en un punto medio', 'Recógeme cerca de mi casa (aunque no tengo movilidad xd)'], notas: { 'Nos encontramos en un punto medio': 'Parque, mall, etc.', 'Recógeme cerca de mi casa (aunque no tengo movilidad xd)': 'Esta opción nos queda cerca del lugar al que íbamos a comer.' } },
   { k: 'vestimenta', l: 'Vestimenta', t: '¿Qué vestimenta prefieres?', o: ['Casual', 'Semiformal', 'Formal'] },
   { k: 'pelicula', l: 'Película', t: '¿Qué tipo de película vemos?', o: ['Terror', 'Comedia', 'Acción', 'Romance', 'Suspenso', 'Animación'] },
   { k: 'cierre', l: 'Despedida', t: 'Para despedirnos al final de la invitación...', o: ['Un choque de puños, muy profesional 👊', 'Un simple "nos vemos", sin rodeos', 'Besito en el cachete'], notas: { 'Un choque de puños, muy profesional 👊': 'Excelente elección. Puñito reservado 👊', 'Un simple "nos vemos", sin rodeos': 'Perfecto, sin rodeos. Todo en orden.', 'Besito en el cachete': 'Al final tú decides, pero mi cachete ya estará listo. Jeje.' } }
@@ -87,7 +87,6 @@ function renderStep() {
   });
   if (s.k === 'cierre' && answers.cierre) hugNote(answers.cierre);
   if (s.nota && !answers[s.k]) $('note').textContent = s.nota;
-  
 }
 function hugNote(v) {
   if (v.startsWith('Un choque')) $('note').textContent = 'Excelente elección. Puñito reservado 👊';
@@ -187,6 +186,7 @@ $('undo').addEventListener('click', () => show('s-letter'));
   }
   function end(win){
     keysEl.querySelectorAll('button').forEach(b => b.disabled = true);
+    try { localStorage.setItem('juegoTerminado', '1'); } catch(e) {}
     gmsg.textContent = win
       ? '¡Lo adivinaste! Soy Miguel. Nos vemos el día de la cita.'
       : 'Te quedaste sin oportunidades. Ahora sí, nos vemos el día de la cita, ese mismo día antes de vernos te dire quien soy :p';
@@ -212,7 +212,18 @@ $('undo').addEventListener('click', () => show('s-letter'));
     errors = 0; guessed = new Set(); gmsg.textContent = '';
     build(); paint();
   }
-  $('anonBtn').addEventListener('click', () => { reset(); show('s-game'); });
+  $('anonBtn').addEventListener('click', () => {
+    let ya = false;
+    try { ya = localStorage.getItem('juegoTerminado') === '1'; } catch(e) {}
+    if (ya) {
+      keysEl.innerHTML = '';
+      wordEl.textContent = 'Soy Miguel';
+      gmsg.textContent = 'Ya jugaste. Nos vemos el día de la cita.';
+      show('s-game');
+      return;
+    }
+    reset(); show('s-game');
+  });
   $('gameBack').addEventListener('click', () => show('s-sum'));
 })();
 
